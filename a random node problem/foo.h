@@ -1,24 +1,28 @@
 //
-// Created by ayush on 01-10-2018.
+// Created by ayush on 04-10-2018.
 //
 
 #ifndef RESEARCH101_FOO_H
 #define RESEARCH101_FOO_H
 
-#include <vector>
-#include "coordinates.h"
-#include "lines.h"
+#include "coordinate.h"
+#include "line.h"
+
 
 class foo {
-    std::vector<coordinates> foo_coordinates;
-    std::vector<lines> foo_lines;
+    std::vector<coordinate> foo_coordinate;
+    std::vector<line> foo_line;
+
     void init();
 
 public:
-    foo(const std::vector<coordinates> &foo_coordinates);
     foo();
+    foo(const std::vector<coordinate> &foo_coordinate);
+    virtual ~foo();
 
-    int evaluate(coordinates t);
+    int evaluate(coordinate x);
+    void show();
+
 };
 
 
