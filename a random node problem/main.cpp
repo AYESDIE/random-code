@@ -1,14 +1,10 @@
-#include <iostream>
 #include "boo.h"
-#include <cmath>
+#include <iostream>
 
 using namespace std;
 
-int main() {
-    for (double i = 2; i < 10; ++i) {
-        boo phoo(10,std::pow(2,i),i);
-        phoo.evaluate();
-        phoo.result();
-    }
+int main(){
+    boo b(50);
+    cout<<b;
     return 0;
 }

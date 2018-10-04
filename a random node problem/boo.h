@@ -1,32 +1,30 @@
 //
-// Created by ayush on 30-09-2018.
+// Created by ayush on 01-10-2018.
 //
 
 #ifndef RESEARCH101_BOO_H
 #define RESEARCH101_BOO_H
 
+#include "coordinates.h"
 #include "foo.h"
+#include <vector>
+#include <ostream>
+
 
 class boo {
-    double boo_steps;
+    int boo_step;
+    foo boo_foo;
+    int boo_AC;
+    int boo_WA;
+    int boo_PC;
     double boo_length;
-    double boo_node;
-    double boo_edge;
-    double boo_total;
-    double boo_AC;
-    double boo_PC;
-    double boo_WA;
-    vector<vector<double>> boo_locations;
-
-    void boo_equate();
+    std::vector<coordinates> boo_coordinates;
+    int boo_node;
 
 public:
-    boo(double boo_steps, double boo_length, double boo_node);
+    boo(int boo_node, int boo_step=100);
 
-    virtual ~boo();
-
-    void evaluate();
-    void result();
+    friend std::ostream &operator<<(std::ostream &os, const boo &boo1);
 
 
 };
