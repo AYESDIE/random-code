@@ -5,10 +5,10 @@
 #include <random>
 
 /*!
- * makes coordinates equidistant to each other
+ * makes "coordinate" equidistant to each other
  * @param edgenode
  * @param length
- * @return
+ * @return vector of "coordinate"
  */
 std::vector<coordinate> makecoordinate(int edgenode,int length=4){
     std::vector<coordinate> temp;
@@ -36,11 +36,153 @@ std::vector<coordinate> makecoordinate(int edgenode,int length=4){
     return temp;
 }
 
-int main(){
-    std::vector<coordinate> c = makecoordinate(10);
+//void fspt(int n){
+//    std::vector<coordinate> c = makecoordinate(n);
+//    foo boo(c);
+//    double x,y;
+//    long long int step,ac=0,wa=0;
+//    int length = 4;
+//
+//    std::cout<<">> x : ";
+//    std::cin>>x;
+//    std::cout<<">> y : ";
+//    std::cin>>y;
+//    std::cout<<">> step size : ";
+//    std::cin>>step;
+//
+//    for (int i = 0; i <= length*step; i++) {
+//        for (int j = 0; j <= length*step; ++j) {
+//            double a = (double)i/step;
+//            double b = (double)j/step;
+//            coordinate cx(a,b);
+//            n = boo.evaluate(cx);
+//            if(n==2){
+//                ac++;
+//            }
+//            else{
+//                wa++;
+//            }
+//        }
+//    }
+//
+//    std::cout<<"\n>> AC : "<<ac<<"\n>> WA : "<<wa;
+//}
+
+void arv(int n){
+    std::vector<coordinate> c = makecoordinate(n);
+    long long int t,ac=0,wa=0;
     foo boo(c);
+    std::default_random_engine generator;
+
+    std::cout<<"\n Number of iterations : ";
+    std::cin>>t;
+    std::uniform_real_distribution<double> distribution(0,4);
+    for (int i = 0; i < t; ++i) {
+        double roll1 = distribution(generator);
+        double roll2 = distribution(generator);
+        coordinate cx(roll1,roll2);
+        if(boo.evaluate(cx)==2){
+            ac++;
+        }
+        else{
+            wa++;
+        }
+    }
+    std::cout<<"\n>> AC : "<<ac<<"\n>> WA : "<<wa;
+}
+
+//void rspt(int n){
+//    std::vector<coordinate> c = makecoordinate(n);
+//    foo boo(c);
+//    double x,y;
+//    long long int step,ac=0,wa=0;
+//    int length = 4;
+//
+//    std::default_random_engine generator;
+//    std::uniform_real_distribution<double> distribution(0,1);
+//    double roll1 = distribution(generator);
+//    double roll2 = distribution(generator);
+//
+//    std::cout<<">> step size : ";
+//    std::cin>>step;
+//
+//    for (int i = 0; i <= length*step; i++) {
+//        for (int j = 0; j <= length*step; ++j) {
+//            double a = (double)i/step;
+//            double b = (double)j/step;
+//            coordinate cx(a,b);
+//            n = boo.evaluate(cx);
+//            if(n==2){
+//                ac++;
+//            }
+//            else{
+//                wa++;
+//            }
+//        }
+//    }
+//
+//    std::cout<<"\n>> AC : "<<ac<<"\n>> WA : "<<wa;
+//
+//}
+
+void mc(int n){
+    std::vector<coordinate> c = makecoordinate(n);
+    foo boo(c);
+    long long int t;
+    std::cout<<"\n Number of iterations : ";
+    std::cin>>t;
+    for (int i = 0; i < 10; ++i) {
+        double l,q;
+        std::cout<<"\n>> x: ";
+        std::cin>>l;
+        std::cout<<"\n>> y: ";
+        std::cin>>q;
+        coordinate cx(l,q);
+        n = boo.evaluate(cx);
+        if(n==2){
+            std::cout<<"\n>> AC";
+        }
+        else{
+            std::cout<<"\n>> WA";
+        }
+        std::cout<<"\n-----------------------------------------------\n";
+    }
+
+
+
+}
+
+int main(){
 
     int a=0,b=0,p=0,n;
+    int c;
+    std::cout<<"\n================================================\n";
+    std::cout<<" Enter nodes per side(minimum = 2): ";
+    std::cin>>n;
+    n=n-2;
+    std::vector<coordinate> x = makecoordinate(n);
+    foo boo(x);
+//    for (int i = 0; i < x.size(); ++i) {
+//        std::cout<<"\n>> "<<x[i];
+//    }
+    std::cout<<"\n 1) All random values\n 2) Fixed starting point and traversal\n 3) Random starting point and traversal \n 4) Manual Checking\n >> ";
+    std::cin>>c;
+    switch (c){
+        case 1:
+            arv(n);
+            break;
+        case 2:
+            //fspt(n);
+            break;
+        case 3:
+            //rspt(n);
+            break;
+        case 4:
+            mc(n);
+            break;
+        default:
+            std::cout<<"\n>>  Consider Rechecking";
+    }
 
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(0,4);
