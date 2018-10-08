@@ -4,6 +4,12 @@
 #include "foo.h"
 #include <random>
 
+/*!
+ * makes coordinates equidistant to each other
+ * @param edgenode
+ * @param length
+ * @return
+ */
 std::vector<coordinate> makecoordinate(int edgenode,int length=4){
     std::vector<coordinate> temp;
     coordinate x;
@@ -31,33 +37,60 @@ std::vector<coordinate> makecoordinate(int edgenode,int length=4){
 }
 
 int main(){
-    coordinate c1(0,0),c2(4,4),c3(0,4),c4(4,0),c5(0,2),c6(2,0),c7(4,2),c8(2,4);
-    std::vector<coordinate> c = makecoordinate(20);
+    std::vector<coordinate> c = makecoordinate(10);
     foo boo(c);
+
+    int a=0,b=0,p=0,n;
 
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(0,4);
-    for (int i = 0; i < 100000; ++i) {
-        double roll1 = distribution(generator);
-        double roll2 = distribution(generator);
-        coordinate cx(roll1,roll2);
-        if(boo.evaluate(cx)==2){
-            std::cout<<cx;
-            std::cout<<" >>"<<boo.evaluate(cx)<<"\n";
-        }
-    }
+//    for (int i = 0; i < 100000; ++i) {
+//        double roll1 = distribution(generator);
+//        double roll2 = distribution(generator);
+//        coordinate cx(roll1,roll2);
+//        if(boo.evaluate(cx)==1){
+//            std::cout<<cx;
+//            std::cout<<" >>"<<boo.evaluate(cx)<<"\n";
+//        }
+//    }
 
-//    for (int i = 0; i <= 400; i++) {
-//        for (int j = 0; j <= 400; ++j) {
-//            double x = (double)i/100;
-//            double y = (double)j/100;
+//    int step = 100;
+//    int length = 4;
+//    for (int i = 0; i <= length*step; i++) {
+//        for (int j = 0; j <= length*step; ++j) {
+//            std::cout<<i<<" "<<j<<"\n";
+//            double x = (double)i/step;
+//            double y = (double)j/step;
 //            coordinate cx(x,y);
-//            if(boo.evaluate(cx)==2){
-//                std::cout<<cx;
-//                std::cout<<" >>"<<boo.evaluate(cx)<<"\n";
+//            n = boo.evaluate(cx);
+//            if(n==2){
+//                a++;
+//            }
+//            else if(n==1){
+//                b++;
+//            }
+//            else{
+//                p++;
 //            }
 //        }
+//    }
 //
+//    std::cout<<a<<"\n"<<b<<"\n"<<p;
+
+//    for (int i = 0; i < 10; ++i) {
+//        double l,q;
+//        std::cin>> l>>q;
+//        coordinate cx(l,q);
+//        n = boo.evaluate(cx);
+//            if(n==2){
+//                std::cout<<"AC";
+//            }
+//            else if(n==1){
+//                std::cout<<"PC";
+//            }
+//            else{
+//                std::cout<<"WA";
+//            }
 //    }
 
 }

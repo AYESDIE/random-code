@@ -1,14 +1,21 @@
-//
-// Created by ayush on 04-10-2018.
-//
 
 #include "foo.h"
 #include <iostream>
 
 void foo::init() {
+    /*!
+     * iterates through all the "coordinate" with the complexity of n^2
+     */
     for (int i = 0; i < foo_coordinate.size(); ++i) {
         for (int j = i+1; j < foo_coordinate.size(); ++j) {
+            /*!
+             * forms a "line" with the name temp
+             */
             line temp(foo_coordinate[i],foo_coordinate[j]);
+
+            /*!
+             * checks if the line already exists
+             */
             int crit=0;
             for (int k = 0; k < foo_line.size(); ++k) {
                 if(temp==foo_line[i]){
@@ -16,6 +23,10 @@ void foo::init() {
                     break;
                 }
             }
+
+            /*!
+             * push the line in the vector if it doesn't exist.
+             */
             if(crit==0){
                 foo_line.push_back(temp);
             }
@@ -42,6 +53,9 @@ void foo::show() {
 }
 
 int foo::evaluate(coordinate s) {
+    /*!
+     * evaluating over all the lines using "check()" of "line"
+     */
     int res=0;
     for (int i = 0; i < foo_line.size(); ++i) {
         if(foo_line[i].check(s)){

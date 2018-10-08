@@ -1,7 +1,8 @@
-//
-// Created by ayush on 02-10-2018.
-//
-
+/*!
+ * Definition for coordinate.h
+ */
+ 
+ 
 #include <vector>
 #include "coordinate.h"
 
@@ -11,6 +12,9 @@ coordinate::coordinate(double coordinate_x, double coordinate_y) : coordinate_x(
                                                                    coordinate_y(coordinate_y) {}
 
 std::vector<double> coordinate::getcoordinate() {
+    /*!
+     * Returning "coordinate" in vector form
+     */
     std::vector<double> temp({coordinate_x,coordinate_y});
     return temp;
 }
