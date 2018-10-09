@@ -108,7 +108,7 @@ void arv(foo boo, int l){
 /*!
  * this function traverses through the entire area starting from (r1,r2) taking given "step" in between the length
  *
- *      0 <= r1,r2 <= ( l / step )
+ *      0 ≤ r1,r2 ≤ ( l / step )
  *
  * these r1 and r2 are added as noise to normal coordinates as in fspt()
  *
@@ -199,7 +199,8 @@ int main(){
     for (int i = 0; i < x.size(); ++i) {
         std::cout<<"\n>> "<<x[i];
     }
-    std::cout<<"\n 1) All random values\n 2) Fixed starting point and traversal\n 3) Random starting point with noise and traversal \n 4) Manual Checking\n >> ";
+    std::cout<<"\n================================================\n";
+    std::cout<<"\n\n1) All random values\n2) Fixed starting point and traversal\n3) Random starting point with noise and traversal \n4) Manual Checking\n\n >> ";
     std::cin>>c;
     switch (c){
         case 1:
