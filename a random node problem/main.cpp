@@ -36,16 +36,29 @@ std::vector<coordinate> makecoordinate(int edgenode,int length=4){
     return temp;
 }
 
+/*!
+ * this function traverses through the entire area starting from (0,0) taking given "step" in between the length
+ *
+ * if step = 100 and l = 1,
+ *      increment in each iteration = 0.01
+ *
+ * @param boo - object of class foo to perform operations
+ * @param l - length of side
+ */
 void fspt(foo boo,int l){
+
     long long int step,amp;
     long long int ac=0,wa=0;
     coordinate p(0,0);
     std::cout<<"\nStarting coordinate:"<<p;
     std::cout<<"\n>> Step Size : ";
     std::cin>>step;
-
     long long int length = step*l;
     amp = l;
+    /*!
+     *      Caution: the following 2 enclosed loop are to prevent any floating point error that were being caused when using
+     *      i and j as double rather than long long int
+     */
     for (long long int i = 0; i <= length ; i+=amp) {
         for (long long int j = 0; j <= length ; j+=amp) {
             double a,b;
@@ -64,13 +77,21 @@ void fspt(foo boo,int l){
     std::cout<<"\n>> AC : "<<ac<<"\n>> WA : "<<wa;
 }
 
-void arv(foo boo){
+/*!
+ * this function checks for all random values
+ * @param boo - object of class foo to perform operations
+ * @param l - length of side
+ */
+void arv(foo boo, int l){
     long long int t,ac=0,wa=0;
     std::default_random_engine generator;
     std::cout<<"\n Number of iterations : ";
     std::cin>>t;
-    std::uniform_real_distribution<double> distribution(0,4);
+    std::uniform_real_distribution<double> distribution(0,l);
     for (int i = 0; i < t; ++i) {
+        /*!
+         * generating 2 random values between 0 and l
+         */
         double roll1 = distribution(generator);
         double roll2 = distribution(generator);
         coordinate cx(roll1,roll2);
@@ -84,39 +105,63 @@ void arv(foo boo){
     std::cout<<"\n>> AC : "<<ac<<"\n>> WA : "<<wa;
 }
 
-//void rspt(foo boo, int l){
-//    long long int step,amp;
-//    long long int ac=0,wa=0;
-//    std::default_random_engine generator;
-//    std::uniform_real_distribution<double> distribution(0,l);
-//    double roll1 = distribution(generator);
-//    roll1=0;
-//    coordinate p(roll1,0);
-//    std::cout<<"\nStarting coordinate:"<<p;
-//    std::cout<<"\n>> step size : ";
-//    std::cin>>step;
-//
-//    long long int length = step*l;
-//    amp = l;
-//    for (long long int i = 0; i <= length ; i+=amp) {
-//        for (long long int j = 0; j <= length ; j+=amp) {
-//            double a,b;
-//            a = (double)i / step;
-//            b = (double)j / step;
-//            coordinate cx(a,b);
-//            int n = boo.evaluate(cx);
-//            if(n==2){
-//                ac++;
-//            }
-//            else{
-//                wa++;
-//            }
-//        }
-//    }
-//
-//    std::cout<<"\n>> AC : "<<ac<<"\n>> WA : "<<wa;
-//}
+/*!
+ * this function traverses through the entire area starting from (r1,r2) taking given "step" in between the length
+ *
+ *      0 <= r1,r2 <= ( l / step )
+ *
+ * these r1 and r2 are added as noise to normal coordinates as in fspt()
+ *
+ * @param boo - object of class foo to perform operations
+ * @param l - length of side
+ */
+void rspt(foo boo, int l){
+    double noise1,noise2;
+    long long int step,amp=l;
+    long long int ac=0,wa=0;
 
+    std::cout<<"\n>> step size : ";
+    std::cin>>step;
+    noise1 = (double)l/step;
+
+    /*!
+     * generating "r1" and "r2" noises
+     */
+    std::default_random_engine generator;
+    std::uniform_real_distribution<double> distribution(0,noise1);
+    noise2 = distribution(generator);
+    noise1 = distribution(generator);
+
+    coordinate p(noise1,noise2);
+    std::cout<<"\nStarting coordinate"<<p;
+    long long int length = step*l;
+    /*!
+     *      Caution: the following 2 enclosed loop are to prevent any floating point error that were being caused when using
+     *      i and j as double rather than long long int
+     */
+    for (long long int i = 0; i <= length ; i+=amp) {
+        for (long long int j = 0; j <= length ; j+=amp) {
+            double a,b;
+            a = ((double)i / step)+noise1;
+            b = ((double)j / step)+noise2;
+            coordinate cx(a,b);
+            int n = boo.evaluate(cx);
+            if(n==2){
+                ac++;
+            }
+            else{
+                wa++;
+            }
+        }
+    }
+
+    std::cout<<"\n>> AC : "<<ac<<"\n>> WA : "<<wa;
+}
+
+/*!
+ * manual checking of points
+ * @param boo - object of class foo to perform operations
+ */
 void mc(foo boo){
     long long int t;
     int n;
@@ -141,9 +186,7 @@ void mc(foo boo){
 }
 
 int main(){
-
-    int a=0,b=0,p=0,n;
-    int c,l=4;
+    int n,c,l=4;
     std::cout<<"\n================================================\n";
     std::cout<<" Enter nodes per side(minimum = 2): ";
     std::cin>>n;
@@ -156,17 +199,17 @@ int main(){
     for (int i = 0; i < x.size(); ++i) {
         std::cout<<"\n>> "<<x[i];
     }
-    std::cout<<"\n 1) All random values\n 2) Fixed starting point and traversal\n 3) Fixed starting point with noise and traversal \n 4) Manual Checking\n >> ";
+    std::cout<<"\n 1) All random values\n 2) Fixed starting point and traversal\n 3) Random starting point with noise and traversal \n 4) Manual Checking\n >> ";
     std::cin>>c;
     switch (c){
         case 1:
-            arv(boo);
+            arv(boo,l);
             break;
         case 2:
             fspt(boo,l);
             break;
         case 3:
-            //rspt(boo,l);
+            rspt(boo,l);
             break;
         case 4:
             mc(boo);
