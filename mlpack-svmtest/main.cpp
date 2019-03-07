@@ -64,12 +64,13 @@ int main()
   arma::mat scores = parameters * dataset;
   std::cout << "score\n" << scores;
 
-  arma::sp_mat correctScores = scores % groundTruth;
+  arma::mat correctScores = arma::repmat(arma::ones(numClasses).t()
+                                         * (scores % groundTruth), numClasses, 1);
   std::cout << "correctSCores\n" << correctScores;
 
-  std::cout << "something\n" << arma::repmat(arma::ones(numClasses).t() * correctScores, numClasses, 1);
+  arma::mat margin = scores - correctScores + delta
+                     - (delta * groundTruth);
 
-  arma::mat margin = scores - arma::repmat(arma::ones(numClasses).t() * correctScores, numClasses, 1) + delta - (delta * groundTruth);
   std::cout << "margin\n" << margin;
 
   return 0;
