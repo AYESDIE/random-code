@@ -39,7 +39,6 @@ int main()
 
   int i = DP.size() - 1;
   int j = DP[0].size() - 1;
-  int traverser;
   while (DP[i][j]!=0)
   {
     if(DP[i-1][j] == DP[i][j])

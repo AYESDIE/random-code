@@ -6,3 +6,5 @@ set(CMAKE_CXX_STANDARD 11)
 add_executable(maxmatmul maxmatmul.cpp)
 
 add_executable(lcs longestcommonsubseq.cpp)
+
+add_executable(knapsack01 knapsack01.cpp)
