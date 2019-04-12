@@ -11,7 +11,7 @@ void maxmatmul(const vector<int>& p,
   int n = p.size();
 
   // Placeholders
-  vector<int> temp(n - 1);
+  vector<int> temp(n);
 
 
   // Refresh values
@@ -25,12 +25,21 @@ void maxmatmul(const vector<int>& p,
     s.push_back(temp);
   }
 
-  int cn = 1;
-  for (int l = 1; l < n; ++l) {
-    for (int i = l; i < n-1; ++i) {
-
+  for (int l = 2; l < n ; ++l) {
+    for (int i = 0; i < n-l+1; ++i) {
+      int j = i+l-1;
+      m[i][j] = inf;
+      for (int k = i; k < j; ++k) {
+        int q = m[i][k] + m[k+1][j] + p[i-1]*p[k]*p[j];
+        if (q < m[i][j])
+        {
+          m[i][j] = q;
+          s[i][j] = k;
+        }
+      }
     }
   }
+
 }
 
 void printmat(const vector<vector<int>>& s,
@@ -42,8 +51,8 @@ void printmat(const vector<vector<int>>& s,
   else
   {
     cout << "(";
-    printmat(s, i, s[i][j]);
-    printmat(s, s[i][j] + 1, j);
+    printmat(s, i, s[i + 1][j]);
+    printmat(s, s[i + 1][j] + 1, j);
     cout << ")";
   }
 
@@ -51,16 +60,18 @@ void printmat(const vector<vector<int>>& s,
 
 int main()
 {
-  vector<int> p({1, 2, 3, 4});
+  vector<int> p({30, 35, 15, 5, 10, 20, 25});
   vector<vector<int>> m,s;
   maxmatmul(p,m,s);
 
   for (int i = 0; i < m.size(); ++i) {
     for (int j = 0; j < m[0].size(); ++j) {
-      cout<< m[i][j] << " , ";
+      cout<< s[i][j] << " , ";
     }
     cout << "\n";
   }
+
+
 
   return 0;
 }

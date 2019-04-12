@@ -11,3 +11,4 @@ add_executable(knapsack01 knapsack01.cpp)
 
 add_executable(huffmancode huffmancode.cpp)
 
+add_executable(dfs dfs.cpp)
