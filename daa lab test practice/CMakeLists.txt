@@ -8,3 +8,6 @@ add_executable(maxmatmul maxmatmul.cpp)
 add_executable(lcs longestcommonsubseq.cpp)
 
 add_executable(knapsack01 knapsack01.cpp)
+
+add_executable(huffmancode huffmancode.cpp)
+

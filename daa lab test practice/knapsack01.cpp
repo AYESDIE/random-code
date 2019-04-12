@@ -9,10 +9,10 @@ inline int max(int a, int b) {
 
 int main()
 {
-  vector<int> wt({1, 3, 4, 5});
-  vector<int> val({1, 4, 5, 7});
+  vector<int> wt({10, 20, 30});
+  vector<int> val({60, 100, 120});
 
-  int totalwt = 7;
+  int totalwt = 50;
 
   vector<vector<int>> DP(val.size() + 1);
   vector<int> placeholder(totalwt + 1);
