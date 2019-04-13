@@ -18,3 +18,7 @@ add_executable(huffington test/hufftest.cpp)
 add_executable(llcs test/lcs.cpp)
 
 add_executable(ks01 test/ks01.cpp)
+
+add_executable(matmx test/matmx.cpp)
+
+add_executable(bfs BFS.cpp)
